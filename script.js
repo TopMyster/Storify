@@ -1,5 +1,5 @@
 const userinput = document.getElementById('usertext').value
-
+let API_KEY = ''
 let content
 let self = true
 
@@ -13,12 +13,19 @@ document.getElementById('random').addEventListener('click', function() {
     generate()
 })
 
+async function getKey() {
+    const response = await fetch('storage.json')
+    const data = await response.json()
+    API_KEY = data.API_KEY
+}
+
 function startaudio() {
     let audio = new Audio('bg.mp3')
     audio.play()
 }
 
 async function generate() {
+  getKey()
     if (self === true) {
     content = `generate a childrens story based on the topic ${userinput} and dont ask any follow up questions. Have the title of the story be be the first sentance then one line under it the story. make the story at least 4 paragraphs long.`
 } else if (self === false) {
