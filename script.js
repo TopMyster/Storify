@@ -20,7 +20,6 @@ async function getKey() {
 getKey()
 
 async function generate() {
-  document.getElementById('suggestions').display = 'none'
   const userinput = document.getElementById('usertext').value
     if (self === true) {
     content = `generate a childrens story based on the topic ${userinput} and dont ask any follow up questions. Have the title of the story be be the first sentance then one line under it the story. make the story at least 6 paragraphs long. Make the story not have any vulgar words or inappropiate topics.`
@@ -60,6 +59,7 @@ async function generate() {
         data.choices[0].text?.content ||
         "No reply received.";
       result.textContent = reply
+      document.getElementById('suggestions').display = 'none'
     } else {
       console.error("Unexpected response format:", data)
       result.textContent = "This feature is not working at this time"
