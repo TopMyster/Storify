@@ -1,4 +1,3 @@
-const userinput = document.getElementById('usertext').value
 let API_KEY = ''
 let content
 let self = true
@@ -13,23 +12,24 @@ document.getElementById('random').addEventListener('click', function() {
     generate()
 })
 
-async function getKey() {
-    const response = await fetch('storage.json')
-    const data = await response.json()
-    API_KEY = data.API_KEY
-}
-
 function startaudio() {
     let audio = new Audio('bg.mp3')
     audio.play()
 }
 
+async function getKey() {
+    const response = await fetch('storage.json')
+    const data = await response.json()
+    API_KEY = data.API_KEY;
+}
+getKey()
+
 async function generate() {
-  getKey()
+  const userinput = document.getElementById('usertext').value
     if (self === true) {
-    content = `generate a childrens story based on the topic ${userinput} and dont ask any follow up questions. Have the title of the story be be the first sentance then one line under it the story. make the story at least 4 paragraphs long.`
+    content = `generate a childrens story based on the topic ${userinput} and dont ask any follow up questions. Have the title of the story be be the first sentance then one line under it the story. make the story at least 6 paragraphs long.`
 } else if (self === false) {
-    content = `generate a childrens story based on a random topic`
+    content = `generate a childrens story based on a random topic. Do not repeat stories and make sure to generate the full story. make the storys at least 6 paragraphs long.`
 }
   startaudio() 
    try {
@@ -48,7 +48,7 @@ async function generate() {
           },
         ],
         temperature: 1,
-        max_tokens: 200, 
+        max_tokens: 900, 
         top_p: 1,
         stream: false
       }),
@@ -56,6 +56,7 @@ async function generate() {
 
     const data = await response.json()
     console.log("Response data:", data)
+    const result = document.getElementById('result')
 
     if (data.choices && data.choices.length > 0) {
         document.getElementById('resultdiv').style.display = 'block'
