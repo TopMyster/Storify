@@ -30,6 +30,7 @@ document.getElementById('play').addEventListener('click', () => {
                 .then((audio) => {
                     audio.play();
                     laudio.play()
+                    laudio.loop() = true
                 })
                 .catch((error) => {
                     console.error('Error:', error);

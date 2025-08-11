@@ -41,7 +41,7 @@ async function generate() {
             content: content,
           },
         ],
-        temperature: 1,
+        temperature: 1.5,
         max_tokens: 900, 
         top_p: 1,
         stream: false
