@@ -1,4 +1,4 @@
-let API_KEY = ''
+let API_KEY = process.env.API_KEY;
 let content
 let self = true
 
@@ -11,13 +11,6 @@ document.getElementById('random').addEventListener('click', function() {
     self = false
     generate()
 })
-
-async function getKey() {
-    const response = await fetch('storage.json')
-    const data = await response.json()
-    API_KEY = data.API_KEY;
-}
-getKey()
 
 async function generate() {
   document.getElementById('suggestions').display = 'none'
