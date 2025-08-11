@@ -60,6 +60,7 @@ button:active {
     position: relative;
     box-shadow: 2px 2px 30px rgba(139, 139, 139, 0.138);
     border-radius: 20px;
+    display: none;
 }
 
 #resultdiv h2 {

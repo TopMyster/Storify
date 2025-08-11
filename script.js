@@ -12,11 +12,6 @@ document.getElementById('random').addEventListener('click', function() {
     generate()
 })
 
-function startaudio() {
-    let audio = new Audio('bg.mp3')
-    audio.play()
-}
-
 async function getKey() {
     const response = await fetch('storage.json')
     const data = await response.json()
@@ -31,7 +26,6 @@ async function generate() {
 } else if (self === false) {
     content = `generate a childrens story based on a random topic. Do not repeat stories and make sure to generate the full story. make the storys at least 6 paragraphs long.`
 }
-  startaudio() 
    try {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
