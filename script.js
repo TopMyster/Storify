@@ -59,7 +59,7 @@ async function generate() {
         data.choices[0].text?.content ||
         "No reply received.";
       result.textContent = reply
-      document.getElementById('suggestions').display = 'none'
+      document.getElementById('suggestions').style.display = 'none'
     } else {
       console.error("Unexpected response format:", data)
       result.textContent = "This feature is not working at this time"
