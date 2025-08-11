@@ -13,6 +13,8 @@ body {
 
 #generatesection {
     margin-top: 130px;
+    z-index: 100;
+    position: relative;
 }
 
 button {
