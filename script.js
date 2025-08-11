@@ -20,11 +20,12 @@ async function getKey() {
 getKey()
 
 async function generate() {
+  document.getElementById('suggestions').display = 'none'
   const userinput = document.getElementById('usertext').value
     if (self === true) {
-    content = `generate a childrens story based on the topic ${userinput} and dont ask any follow up questions. Have the title of the story be be the first sentance then one line under it the story. make the story at least 6 paragraphs long.`
+    content = `generate a childrens story based on the topic ${userinput} and dont ask any follow up questions. Have the title of the story be be the first sentance then one line under it the story. make the story at least 6 paragraphs long. Make the story not have any vulgar words or inappropiate topics.`
 } else if (self === false) {
-    content = `generate a childrens story based on a random topic. Do not repeat stories and make sure to generate the full story. make the storys at least 6 paragraphs long.`
+    content = `generate a childrens story based on a random topic. Do not repeat stories and make sure to generate the full story. make the storys at least 6 paragraphs long. Make the story not have any vulgar words or inappropiate topics.`
 }
    try {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -68,3 +69,20 @@ async function generate() {
     result.textContent = "This feature is not working at this time"
   }
 }
+
+function suggest1() {
+  document.getElementById('usertext').value = 'Create a story about friends'
+}
+
+function suggest2() {
+  document.getElementById('usertext').value = 'Make a nice bedtime story'
+}
+
+function suggest3() {
+  document.getElementById('usertext').value = 'Write a story with morals'
+}
+
+function suggest4() {
+  document.getElementById('usertext').value = "Tell a story that's funny"
+}
+
