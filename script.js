@@ -80,4 +80,3 @@ function suggest3() {
 function suggest4() {
   document.getElementById('usertext').value = "Tell a story that's funny"
 }
-
