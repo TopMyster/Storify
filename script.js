@@ -81,13 +81,13 @@ function suggest4() {
   document.getElementById('usertext').value = "Tell a story that's funny"
 }
 
-const shareData = {
-  title: "Here is a child friendly story",
-  text: `${document.getElementById('result').textContent}`,
-  url: "https://storify.vercel.app",
-};
-
 document.getElementById('sharebtn').addEventListener("click", async () => {
+  const shareData = {
+    title: "Here is a child friendly story",
+    text: `${document.getElementById('result').textContent}`,
+    url: "https://storify.vercel.app",
+  }
+
   try {
     await navigator.share(shareData);
   } catch (err) {
