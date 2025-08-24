@@ -94,7 +94,7 @@ button:active {
 }
 
 #suggestions {
-    margin-top: 55px;
+    margin-top: 40px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -127,12 +127,22 @@ input:focus {
     bottom: 25px;
     font-weight: 800;
     font-size: 18px;
-    left: 50%;
-    transform: translate(-50%);
     transition: .2s;
+    left: 25px;
 }
 
 #github:hover {
     scale: 1.1;
     position: fixed;
+}
+
+#sharebtn {
+    position: fixed;
+    right: 10px;
+    top: 5px;
+    padding: 8px 15px;
+    background-color: #00BD55;
+    color: white;
+    font-size: 25px;
+    border-radius: 20px;
 }
