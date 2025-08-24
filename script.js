@@ -83,7 +83,7 @@ function suggest4() {
 
 const shareData = {
   title: "Here is a child friendly story",
-  text: document.getElementById('result').textContent,
+  text: `${document.getElementById('result').textContent}`,
   url: "https://storify.vercel.app",
 };
 
