@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Storify</title>
     <link rel="stylesheet" href="../styles.css">
-    <link rel="icon" href="./assets/logo.ico">
+    <link rel="icon" href="../assets/logo.ico">
 </head>
 <body>
     <center>
@@ -13,7 +13,7 @@
          <h2 class="descript">An AI powered children story generator and reader</h2>
          <div id="generatesection">
             <input id="usertext" placeholder="Type your story's topic"><br>
-            <button id="random">Random topic <span style="font-size: 15px;">⟳</span></button>
+            <button id="random">Random <span style="font-size: 15px;">⟳</span></button>
             <button id="generate" style="background-color: rgb(80, 80, 245); margin-left: 5px;">Generate an Adventure</button>
          </div>
          <div id="resultdiv">
@@ -27,7 +27,7 @@
      <button id="sharebtn" style="background-color: rgb(80, 80, 245)">⌲</button>
      <a href="/themes/index.html"><button style="left: 15px; position: fixed; top: 10px; font-size: 25px; border-radius: 10; padding: 8px 12px;">🎨</button></a>
      <script>
-        laudio = new Audio('./assets/bg.mp3')
+        laudio = new Audio('../assets/bg.mp3')
         document.getElementById('play').addEventListener('click', () => {
         const text = document.getElementById('result').textContent
             puter.ai.txt2speech(text)
@@ -99,7 +99,6 @@
                 data.choices[0].text?.content ||
                 "No reply received.";
             result.textContent = reply;
-            document.getElementById('suggestions').style.display = 'none';
             } else {
             console.error("Unexpected response format:", data);
             result.textContent = "This feature is not working at this time";
