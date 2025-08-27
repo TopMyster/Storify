@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storify</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../assets/logo.ico">
+</head>
+<body>
+    <center>
+         <img width="150px" id="logo" src="../assets/logo.png">
+         <h2 class="descript" style="color: rgb(246, 62, 218)">An AI powered children story generator and reader</h2>
+         <div id="generatesection">
+            <input id="usertext" placeholder="Type your story's topic"><br>
+            <button id="random">Random <span style="font-size: 15px;">⟳</span></button>
+            <button id="generate" style="background-color: rgb(255, 104, 232); margin-left: 5px;">Generate an Fairytale</button>
+         </div>
+         <div id="resultdiv">
+            <h2 id="result"></h2>
+            <button id="play" style="background-color: rgb(255, 104, 232)">Play Audio</button>
+         </div>
+         <img style="width: 100vw; position: absolute;  height: 350px; bottom: 0px; left: 0px; right: 0px; position: fixed; pointer-events: none;" src="../assets/grass.png">
+    </center>
+     <a href="https://github.com/TopMyster/Storify/" target="_blank" id="github">Github</a>
+     <script src="https://js.puter.com/v2/"></script>
+     <button id="sharebtn" style="background-color: rgb(255, 104, 232)">⌲</button>
+     <a href="/themes/index.html"><button style="left: 15px; position: fixed; top: 10px; font-size: 25px; border-radius: 10; padding: 8px 12px;">🎨</button></a>
+     <script>
+        laudio = new Audio('../assets/bg.mp3')
+        document.getElementById('play').addEventListener('click', () => {
+        const text = document.getElementById('result').textContent
+            puter.ai.txt2speech(text)
+                .then((audio) => {
+                    audio.play();
+                    laudio.play()
+                    laudio.loop() = true
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+     </script>
+    <script>
+        let API_KEY = ''
+        let content
+        let self = true
+
+        document.getElementById('generate').addEventListener('click', function() {
+            self = true
+            generate()
+        })
+
+        document.getElementById('random').addEventListener('click', function() {
+            self = false
+            generate()
+        })
+
+        async function generate() {
+        const userinput = document.getElementById('usertext').value;
+        let content;
+
+        if (self === true) {
+            content = `generate a fairytale story based on the topic ${userinput} and dont ask any follow up questions. Have the title of the story be be the first sentance then one line under it the story. make the story at least 6 paragraphs long. Make the story not have any vulgar words or inappropiate topics.`;
+        } else if (self === false) {
+            content = `generate a childrens story based on a random fairytale story. Do not repeat stories and make sure to generate the full story. make the storys at least 6 paragraphs long. Make the story not have any vulgar words or inappropiate topics.`;
+        }
+
+        const result = document.getElementById('result');
+
+        try {
+            const response = await fetch("../api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                model: "openai/gpt-oss-20b",
+                messages: [
+                {
+                    role: "user",
+                    content: content,
+                },
+                ],
+                temperature: 1.5,
+                max_tokens: 900,
+                top_p: 1,
+                stream: false
+            }),
+            });
+
+            const data = await response.json();
+            console.log("Response data:", data);
+
+            if (data.choices && data.choices.length > 0) {
+            document.getElementById('resultdiv').style.display = 'block';
+            const reply =
+                data.choices[0].message?.content ||
+                data.choices[0].text?.content ||
+                "No reply received.";
+            result.textContent = reply;
+            } else {
+            console.error("Unexpected response format:", data);
+            result.textContent = "This feature is not working at this time";
+            }
+        } catch (err) {
+            console.error("Error during fetch:", err);
+            result.textContent = "This feature is not working at this time";
+        }
+        }
+        document.getElementById('sharebtn').addEventListener("click", async () => {
+        const shareData = {
+            title: "Here is a child friendly story",
+            text: `${document.getElementById('result').textContent}`,
+            url: "https://storify.vercel.app",
+        }
+
+        try {
+            await navigator.share(shareData);
+        } catch (err) {
+            console.log(err)
+        }
+        });
+    </script>
+</body>
+</html>
