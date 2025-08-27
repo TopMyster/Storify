@@ -61,9 +61,9 @@
         let content;
 
         if (self === true) {
-            content = `generate a funny story based on the topic ${userinput} and dont ask any follow up questions. Have the title of the story be be the first sentance then one line under it the story. make the story at least 6 paragraphs long. Make the story not have any vulgar words or inappropiate topics.`;
+            content = `generate a funny story based on the topic ${userinput} and dont ask any follow up questions. Have the title of the story be be the first sentance then one line under it the story. make the story at least 6 paragraphs long. Make the story not have any vulgar words or inappropiate topics. It shouldnt be over 2800 characters including spaces`;
         } else if (self === false) {
-            content = `generate a childrens story based on a random funny story. Do not repeat stories and make sure to generate the full story. make the storys at least 6 paragraphs long. Make the story not have any vulgar words or inappropiate topics.`;
+            content = `generate a childrens story based on a random funny story. Do not repeat stories and make sure to generate the full story. make the storys at least 6 paragraphs long. Make the story not have any vulgar words or inappropiate topics. It shouldnt be over 2800 characters including spaces`;
         }
 
         const result = document.getElementById('result');
